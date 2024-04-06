@@ -1,0 +1,10 @@
+#!/bin/bash
+DATE=`date +%d.%m.%Y`
+rm -f test.txt
+path=/tibco/fieldtables/rel4.00
+for i in `cat fieldtables_hosts`
+do
+a=`ssh -x $i "cd $path;ls *flds *fld *v.V | wc -l"`
+echo $i:$a >> test.txt
+done
+mail -s "Fieldtables Validation Leuna and Deleuna servers" -r "DL-TSSC-OSLO-TIDC1@internalgmail.com" DL-TSSC-OSLO-TIDC1@internal.gmail.com </opt/home/prodadm/vorbereitung_rel400401/test.txt
